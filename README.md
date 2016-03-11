@@ -4,4 +4,4 @@ Data backup is one of the most important areas of IT and is essential for smooth
 
 Growing numbers of viruses and malwares are also a risk to business information, as once they have infected your device they often delete or corrupt your data. This is another reason why backing up your data is such an important thing to do.
 
-The sample in the repository shows how to backup the device configuration in Cloudant NoSQL DB and restore the same later. Currently, there are samples for Java; information and instructions regarding the use of these samples can be found in their respective directories.
+The sample in the repository shows how to backup the device configuration in Cloudant NoSQL DB and restore the same later. Currently, there are samples for Java; **information and instructions regarding the use of these samples can be found in their respective directories.**
