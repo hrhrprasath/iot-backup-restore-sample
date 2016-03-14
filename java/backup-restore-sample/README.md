@@ -27,6 +27,20 @@ To build and run the sample, you must have the following installed:
 
 ----
 
+### Register Device in IBM Watson IoT Platform
+
+Follow the steps in [this recipe](https://developer.ibm.com/recipes/tutorials/how-to-register-devices-in-ibm-iot-foundation/) to register your device in Watson IoT Platform if not registered already. And copy the registration details, like the following,
+
+* Organization-ID = [Your Organization ID]
+* Device-Type = [Your Device Type]
+* Device-ID = [Your Device ID]
+* Authentication-Method = token
+* Authentication-Token = [Your Device Token]
+
+We need these details to connect the device to IBM Watson IoT Platform.
+
+----
+
 ### Build & Run the sample using Eclipse
 
 You must have installed the [Eclipse Maven plugin](http://www.eclipse.org/m2e/), to import & run the samples in eclipse. Go to the next step, if you want to run manually.
@@ -47,7 +61,18 @@ You must have installed the [Eclipse Maven plugin](http://www.eclipse.org/m2e/),
 
 ** Satrt Application sample **
 
-* Modify the **application.properties** file with the device registration details 
+* Modify the **application.properties** file with your Organization's name, API-Key and Token.
+
+* Build & run the Application sample **BackupAndRestoreApplicationSample** by right clicking on the project and selecting "Run as" option. You must provide the Cloudant DB username and password. Please refer to [this recipe](https://developer.ibm.com/recipes/tutorials/backup-restore-device-configuration-in-ibm-iot-foundation-2/) for more information about how to create Cloudant DB and run the sample.
+
+* Observe that the application starts and provides the following command that the user can perform,
+     
+    backup     :: Sends a backup command to the list of device(s)
+	restore id :: Sends a restore command along with the config file. Specify the ID that you received during the backup.
+
+* Type **backup** in the console to backup the device configuration file into Cloudant DB.
+
+* Type **restore <id>** to restore the old configuration into the device.
 
 ----
 
@@ -55,50 +80,49 @@ You must have installed the [Eclipse Maven plugin](http://www.eclipse.org/m2e/),
 
 * Clone the gateway-samples project using git clone as follows,
    
-    `git clone https://github.com/ibm-messaging/gateway-samples.git`
+    `git clone https://github.com/ibm-messaging/iot-backup-restore-sample.git`
     
 * Navigate to the advanced-gateway-sample project, 
 
-    `cd gateway-samples\java\advanced-gateway-sample`
+    `cd iot-backup-restore-sample\java\backup-restore-sample`
     
 * Run the maven build as follows,
 
     `mvn clean package`
     
-This will download the Java Client library for Watson IoT Platform (Currently its shipped as part of this sample, but soon it will be made available in maven central repository), download all required dependencies and starts the building process. Once built, the sample can be located in the target directory, for example, target\ibmiot-advanced-gateway-sample-0.0.1.jar.
+This will download the Java Client library for Watson IoT Platform (Currently its shipped as part of this sample, but soon it will be made available in maven central repository), download all required dependencies and starts the building process. Once built, the sample can be located in the target directory, for example, target\ibmiot-device-backup-restore-sample-0.0.1.jar.
 
 ----
 
-### Register Gateway in IBM Watson IoT Platform
+### Running the Device Sample
 
-Follow the steps in [this recipe](https://developer.ibm.com/recipes/tutorials/how-to-register-gateways-in-ibm-watson-iot-platform/) to register your gateway in Watson IoT Platform if not registered already. And copy the registration details, like the following,
+* Navigate to **target/classes** directory and Modify the **device.properties** file with the device registration details. 
 
-* Organization-ID = [Your Organization ID]
-* Device-Type = [Your Gateway Device Type]
-* Device-ID = [Your Gateway Device ID]
-* Authentication-Method = token
-* Authentication-Token = [Your Gateway Token]
+* Build & Run the **BackupAndRestoreDeviceSample** by executing the following command,
 
-We need these details to connect the gateway to IBM Watson IoT Platform.
-
-----
-
-### Running the HomeGateway Sample
-
-* Navigate to **target/classes** directory and modify **MGatewaySample.properties** file with the registration details that you noted in the previous step.
-* Also, generate the Organization's API-Key and Token and update the same if the registration mode is manual (as of now, only the manual registration is supported)
-* Run the sample using the following command,
-
-    `mvn exec:java -Dexec.mainClass="com.ibm.iotf.sample.gateway.HomeGatewaySample"`
+    `mvn exec:java -Dexec.mainClass="com.ibm.iotf.sample.client.device.BackupAndRestoreDeviceSample"`
 
 **Note:** If there is an Error, try extracting the ibmwiotp.jar present in target/classes directory to the same location and run again. Remember the jar must be extracted in the same location. 
 
-* In order to control one or more devices, one need to start the sample application present in the sample, Run the following command to start the application sample,
+* Observe that the device connects to the Watson IoT Platform and listents for the backup & restore command from the application.
 
-    `mvn exec:java -Dexec.mainClass="com.ibm.iotf.sample.application.HomeApplication"`
+----
 
-Observe that the Application provides list of options to control one or more devices,
+### Running the Application Sample
 
-Also, In order to push a **firmware to a Gateway/device or reboot Gateway/device**, follow the [part-2 and part-3 of this recipe](https://developer.ibm.com/recipes/tutorials/raspberry-pi-as-managed-gateway-in-watson-iot-platform-part-2/). This shows how to push a firmware using the Watson IoT Platform dashboard.
+* Modify the **application.properties** file with your Organization's name, API-Key and Token.
+
+* Start the Application sample **BackupAndRestoreApplicationSample** by executing the following command, You must provide the Cloudant DB username and password. Please refer to [this recipe](https://developer.ibm.com/recipes/tutorials/backup-restore-device-configuration-in-ibm-iot-foundation-2/) for more information about how to create Cloudant DB and run the sample.
+
+    `mvn exec:java -Dexec.mainClass="com.ibm.iotf.sample.client.device.BackupAndRestoreDeviceSample" -Dexec.args="<username> <password>"` 
+
+* Observe that the application starts and provides the following command that the user can perform,
+     
+    backup     :: Sends a backup command to the list of device(s)
+	restore id :: Sends a restore command along with the config file. Specify the ID that you received during the backup.
+
+* Type **backup** in the console to backup the device configuration file into Cloudant DB.
+
+* Type **restore <id>** to restore the old configuration into the device.
 
 ----
