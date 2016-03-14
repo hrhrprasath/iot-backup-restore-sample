@@ -1,4 +1,4 @@
-# iot-backup-restore-sample(Update in progress)
+# iot-backup-restore-sample
 
 Data backup is one of the most important areas of IT and is essential for smooth running of any business. Data loss can happen in many ways, the most common causes are physical failure of your device, accidental error, theft or disasters like fire, flood and etc.. It is also common for data to be saved to just one place, like home folder. Which means that if this data were to be accidentally changed or deleted it would take considerable time and expense to restore it.
 
