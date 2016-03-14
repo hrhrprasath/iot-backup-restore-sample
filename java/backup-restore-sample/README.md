@@ -1,19 +1,22 @@
-Advanced gateway sample
+Backup & Restore sample
 ============================================
 
-In this sample, we demonstrate a [sample home gateway](https://github.com/ibm-messaging/gateway-samples/blob/master/java/advanced-gateway-sample/src/main/java/com/ibm/iotf/sample/gateway/HomeGatewaySample.java) that manages few attached home devices like, Lights, Switches, Elevator, Oven and OutdoorTemperature. And the following configuration is assumed,
- 
- * Few devices are not manageable
- * Few devices are manageable but accept only firmware
- * Few devices are manageable but accept only Device actions
- * Few devices are manageable and accept both firmware/device actions 
- * All devices publish events and few devices accept commands.
+This sample demonstrates how one can backup the configuration file of a device in Cloudant NoSQL DB and restore the same later with a sample. The IBM Watson IoT Platform Events and Commands are used to backup and restore the configuration file. Refer to the [documentation](https://docs.internetofthings.ibmcloud.com/getting_started/concepts.html) to know more about the basic concepts like, Device, Application, Events, Commands and etc..
 
-Also, the sample has an [application](https://github.com/ibm-messaging/gateway-samples/blob/master/java/advanced-gateway-sample/src/main/java/com/ibm/iotf/sample/application/HomeApplication.java) that can be used to control one or more attached devices. For example, turn on/off a particular switch, turn on Oven or control the brightness of the light and etc..
+This recipe demonstrates the backup & restore of the configuration file using the following Events and Commands, 
 
-Also, one can use the IBM Watson IoT Platform dashboard to update the firmware, reboot and reset the gateway or devices connected through the gateway.
+* **backup-command** – A command that will be sent by the application to a device to backup the configuration file.
+* **backup-event** – An event that will be sent by the device on receiving the backup-command, the event will have the contents of the configuration file.
+* **restore-command** – A command that will be sent by the application to a device to restore the configuration file, the command will have the contents of the configuration file.
+* **restore-ack** – An event that will be sent by the device after completing the restore operation, informing the status of the restore operation.
+
+The above command and event names are just random names and can be replaced with any valid MQTT identifier.
 
 ----
+
+### Tutorial Explaining the sample
+
+Refer to [this recipe](https://developer.ibm.com/recipes/tutorials/backup-restore-device-configuration-in-ibm-iot-foundation-2/), that explains the sample present in this github project in detail.
 
 ### Prerequisites
 To build and run the sample, you must have the following installed:
@@ -30,19 +33,21 @@ You must have installed the [Eclipse Maven plugin](http://www.eclipse.org/m2e/),
 
 * Clone the gateway-samples project using git clone as follows,
 
-    `git clone https://github.com/ibm-messaging/gateway-samples.git`
+    `git clone https://github.com/ibm-messaging/iot-backup-restore-sample.git`
     
-* Import the advanced-gateway-sample project into eclipse using the File->Import option in eclipse.
+* Import the backup-restore-sample project into eclipse using the File->Import option in eclipse.
 
-* Modify the **DMGatewaySample.properties** file with the gateway registration details (Refer below to know how to register the gateway in Watson IoT Platform).
+**Start device sample**
 
-* Also, generate the Organization's API-Key and Token and update the same in **DMGatewaySample.properties** file if the registration mode is manual (as of now, only the manual registration is supported).
+* Modify the **device.properties** file with the device registration details. 
 
-* Run the **HomeGatewaySample** by right clicking on the project and selecting "Run as" option.
+* Build & Run the **BackupAndRestoreDeviceSample** by right clicking on the project and selecting "Run as" option.
 
-* Observe that the gateway publishes events for itself and on behalf of the devices connected through it.
+* Observe that the device connects to the Watson IoT Platform and listents for the backup & restore command from the application.
 
-* In order to control one or more devices, you need to start the **HomeApplication** present in the project. The application provides list of options to control the devices attached.
+** Satrt Application sample **
+
+* Modify the **application.properties** file with the device registration details 
 
 ----
 
