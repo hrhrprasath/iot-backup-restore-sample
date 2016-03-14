@@ -57,9 +57,9 @@ You must have installed the [Eclipse Maven plugin](http://www.eclipse.org/m2e/),
 
 * Build & Run the **BackupAndRestoreDeviceSample** by right clicking on the project and selecting "Run as" option.
 
-* Observe that the device connects to the Watson IoT Platform and listents for the backup & restore command from the application.
+* Observe that the device connects to the Watson IoT Platform and listens for the backup & restore command from the application.
 
-** Satrt Application sample **
+** Start Application sample **
 
 * Modify the **application.properties** file with your Organization's name, API-Key and Token.
 
@@ -76,7 +76,7 @@ You must have installed the [Eclipse Maven plugin](http://www.eclipse.org/m2e/),
 
 ----
 
-### Building the sample
+### Building the sample - Required if you want to run the sample outside of Eclipse
 
 * Clone the gateway-samples project using git clone as follows,
    
@@ -94,7 +94,7 @@ This will download the Java Client library for Watson IoT Platform (Currently it
 
 ----
 
-### Running the Device Sample
+### Running the Device Sample outside Eclipse
 
 * Navigate to **target/classes** directory and Modify the **device.properties** file with the device registration details. 
 
@@ -104,11 +104,11 @@ This will download the Java Client library for Watson IoT Platform (Currently it
 
 **Note:** If there is an Error, try extracting the ibmwiotp.jar present in target/classes directory to the same location and run again. Remember the jar must be extracted in the same location. 
 
-* Observe that the device connects to the Watson IoT Platform and listents for the backup & restore command from the application.
+* Observe that the device connects to the Watson IoT Platform and listens for the backup & restore command from the application.
 
 ----
 
-### Running the Application Sample
+### Running the Application Sample outside Eclipse
 
 * Modify the **application.properties** file with your Organization's name, API-Key and Token.
 
